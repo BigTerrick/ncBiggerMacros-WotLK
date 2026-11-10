@@ -54,7 +54,14 @@ local function save()
 				StoredMacrosPerCharacter[MacroFrame.selectedMacro] = body
 			end
 
-			EditMacro(MacroFrame.selectedMacro, nil, nil, "/click ExtraMacros"..MacroFrame.selectedMacro)
+--			EditMacro(MacroFrame.selectedMacro, nil, nil, "/click ExtraMacros"..MacroFrame.selectedMacro)
+			local macroHeader = strmatch(body, "(#show[^%c]*)")
+			if macroHeader == nil then
+				macroHeader = ""
+			else
+				macroHeader = macroHeader .. "\n"
+			end
+			EditMacro(MacroFrame.selectedMacro, nil, nil, macroHeader.."/click ExtraMacros"..MacroFrame.selectedMacro)
 			setbody(MacroFrame.selectedMacro, body)
 		 end
 
